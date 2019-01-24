@@ -20,6 +20,11 @@ class Battle < Sinatra::Base
    erb(:play)
  end
 
+get '/attack' do
+  @player1 = session[:player_name_1]
+  @player2 = session[:player_name_2]
+  erb(:attack)
+end
 
 
 

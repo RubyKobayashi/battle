@@ -6,10 +6,7 @@ feature 'Enter names' do
     expect(page).to have_field(:type => 'text')
   end
   scenario 'you can enter 2 players names' do
-    visit('/')
-    fill_in :player_1_name, with: 'Bear'
-    fill_in :player_2_name, with: 'Bunny'
-    click_button 'Submit'
+    sign_in_and_play
     expect(page).to have_content 'Bear vs. Bunny'
   end
 end
@@ -20,10 +17,15 @@ end
 
 feature 'View Hit Points' do
 scenario 'player 2 hit points' do
-  visit('/')
-  fill_in :player_1_name, with: 'Bear'
-  fill_in :player_2_name, with: 'Bunny'
-  click_button 'Submit'
+  sign_in_and_play
   expect(page).to have_content 'Bunny hit points = 5'
 end
+end
+
+feature  'Attacking' do
+  scenario 'player 1 sees confirmation of attack on player 2' do
+    sign_in_and_play
+    click_button 'Attack'
+    expect(page).to have_content "Bear attacked Bunny"
+  end
 end
